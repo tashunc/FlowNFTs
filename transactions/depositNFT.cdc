@@ -4,7 +4,7 @@ transaction {
   
   prepare(acct: AuthAccount) {
     let collectionReference = 
-      acct.borrow<&BottomShot.Collection>(from: /storage/BottomShot)
+      acct.borrow<&BottomShot.Collection>(from: /storage/BottomShot2)
       ?? panic("No collection found!")
 
     collectionReference.deposit(token: <- BottomShot.mintNFT())
