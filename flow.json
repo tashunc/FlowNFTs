@@ -21,6 +21,10 @@
     "testnet-account": {
       "address": "0x751a0eda3f2d16d4",
       "key": "86be44f98aab382e478e353f079f058b5f86e508ee92e1718cbb5d4d627af8a3"
+    },
+    "lilico-account": {
+      "address": "0x7cfab0e5808cac51",
+      "key": ""
     }
   },
   "deployments": {

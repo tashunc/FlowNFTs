@@ -1,5 +1,5 @@
-import BottomShot from 0xf8d6e0586b0a20c7
-import NonFungibleToken from 0xf8d6e0586b0a20c7
+import BottomShot from 0x751a0eda3f2d16d4
+import NonFungibleToken from 0x751a0eda3f2d16d4
 
 // Our transaction object now takes in arguments!
 transaction(
