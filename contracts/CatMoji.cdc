@@ -1,7 +1,7 @@
 import NonFungibleToken from 0x631e88ae7f1d7c20;
 import MetadataViews from 0x631e88ae7f1d7c20;
 
-pub contract AnimalMoji: NonFungibleToken {
+pub contract CatMoji: NonFungibleToken {
 
   pub var totalSupply: UInt64
 
@@ -52,13 +52,13 @@ pub contract AnimalMoji: NonFungibleToken {
     }
   }
 
-  pub resource interface AnimalMojiCollectionPublic {
+  pub resource interface CatMojiCollectionPublic {
     pub fun deposit(token: @NonFungibleToken.NFT)
     pub fun getIDs(): [UInt64]
     pub fun borrowNFT(id: UInt64): &NonFungibleToken.NFT
   }
 
-  pub resource Collection: AnimalMojiCollectionPublic, NonFungibleToken.Provider, NonFungibleToken.Receiver, NonFungibleToken.CollectionPublic, MetadataViews.ResolverCollection {
+  pub resource Collection: CatMojiCollectionPublic, NonFungibleToken.Provider, NonFungibleToken.Receiver, NonFungibleToken.CollectionPublic, MetadataViews.ResolverCollection {
     pub var ownedNFTs: @{UInt64: NonFungibleToken.NFT}
 
     init () {
@@ -78,7 +78,7 @@ pub contract AnimalMoji: NonFungibleToken {
     }
 
     pub fun deposit(token: @NonFungibleToken.NFT) {
-      let token <- token as! @AnimalMoji.NFT
+      let token <- token as! @CatMoji.NFT
 
       let id: UInt64 = token.id
 
@@ -95,8 +95,8 @@ pub contract AnimalMoji: NonFungibleToken {
 
     pub fun borrowViewResolver(id: UInt64): &AnyResource{MetadataViews.Resolver} {
       let nft = (&self.ownedNFTs[id] as auth &NonFungibleToken.NFT?)!
-      let AnimalMoji = nft as! &AnimalMoji.NFT
-      return AnimalMoji as &AnyResource{MetadataViews.Resolver}
+      let CatMoji = nft as! &CatMoji.NFT
+      return CatMoji as &AnyResource{MetadataViews.Resolver}
     }
 
     destroy() {
@@ -115,7 +115,7 @@ pub contract AnimalMoji: NonFungibleToken {
     thumbnail: String,
   ) {
     var newNFT <- create NFT(
-      id: AnimalMoji.totalSupply,
+      id: CatMoji.totalSupply,
       name: name,
       description: description,
       thumbnail: thumbnail
@@ -123,19 +123,19 @@ pub contract AnimalMoji: NonFungibleToken {
 
     recipient.deposit(token: <-newNFT)
 
-    AnimalMoji.totalSupply = AnimalMoji.totalSupply + UInt64(1)
+    CatMoji.totalSupply = CatMoji.totalSupply + UInt64(1)
   }
 
   init() {
     self.totalSupply = 0
 
-    self.CollectionStoragePath = /storage/AnimalMojiCollection
-    self.CollectionPublicPath = /public/AnimalMojiCollection
+    self.CollectionStoragePath = /storage/CatMojiCollection
+    self.CollectionPublicPath = /public/CatMojiCollection
 
     let collection <- create Collection()
     self.account.save(<-collection, to: self.CollectionStoragePath)
 
-    self.account.link<&AnimalMoji.Collection{NonFungibleToken.CollectionPublic, AnimalMoji.AnimalMojiCollectionPublic, MetadataViews.ResolverCollection}>(
+    self.account.link<&CatMoji.Collection{NonFungibleToken.CollectionPublic, CatMoji.CatMojiCollectionPublic, MetadataViews.ResolverCollection}>(
       self.CollectionPublicPath,
       target: self.CollectionStoragePath
     )

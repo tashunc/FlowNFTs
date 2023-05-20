@@ -4,10 +4,10 @@ transaction {
 
   prepare(acct: AuthAccount) {
     // I changed the storage address here
-    acct.save(<- BottomShot.createCollection(), to: /storage/BottomShot2)
+    acct.save(<- BottomShot.createEmptyCollection(), to: /storage/BottomShot2)
 
     // We're linking two resources in different storage domains
-    acct.link<&BottomShot.Collection{BottomShot.CollectionPublic}>
+    acct.link<&BottomShot.Collection{BottomShot.BottomShotCollectionPublic}>
       (/public/BottomShot2, target: /storage/BottomShot2)
   }
 
