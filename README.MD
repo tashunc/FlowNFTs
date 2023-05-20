@@ -57,4 +57,4 @@ Buildspace
 
 ## License
 
-Jest is [MIT licensed](./LICENSE).
+Project is [MIT licensed](./LICENSE).
